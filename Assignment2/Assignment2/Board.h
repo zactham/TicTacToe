@@ -5,10 +5,10 @@
 class Board
 {
 public:
-	char gameBoard[3][3] = {};
 	Board();
 
 private:
+	char gameBoard[3][3] = {};
 	int xPosAI;
 	int yPosAI;
 	int xPosPlayer;
