@@ -3,5 +3,6 @@
 
 int main()
 {
-	Game* t = new Game();
+	Game* game1 = new Game();
+	delete game1;
 }
