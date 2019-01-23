@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Game.h"
 #include "Board.h"
+#include <time.h>
 
 Game::Game() 
 {
@@ -28,8 +29,7 @@ void Game::playGame()
 		turnCounter++; //counts each time an ai makes a spot
 		if (turnCounter > 1)
 		{
-			checkGameOver();//after 3 turns checks if someone won
-			std::cout << "After AI" << std::endl;
+			checkGameOver();//after 3 turns checks if someone won 
 		}
 
 		if (!gameOver)
@@ -111,13 +111,14 @@ void Game::checkGameOver()
 //Random X is placed on the board in a spot where nothing else is placed
 void Game::AIMove()
 {
+	srand(time(NULL));
 	do
 	{
 		xPosAI = rand() % 3;
 		yPosAI = rand() % 3;
-	} while (b->gameBoard[xPosAI][yPosAI] != '!');
+	} while (b->getPos(xPosAI, yPosAI) != '!');
 	
-	b->gameBoard[xPosAI][yPosAI] = 'X';
+	b->setPos(xPosAI, yPosAI, 'X');
 
 	std::cout << "AI puts an X in " << xPosAI << ", " << yPosAI << std::endl;
 
@@ -129,16 +130,16 @@ void Game::setPlayerMove()
 {
 	xPosPlayer = xPosAI;
 	yPosPlayer = yPosAI;
-	while (b->gameBoard[xPosPlayer][yPosPlayer] != '!')
+	while (b->getPos(xPosPlayer, yPosPlayer) != '!')
 	{
-		std::cout << "Enter player X : ";
+		std::cout << "Enter player Row : ";
 		std::cin >> xPosPlayer;
 		while (xPosPlayer < 0 || xPosPlayer > 2)
 		{
 			std::cout << "Invalid Dimensions, Enter Again : ";
 			std::cin >> xPosPlayer;
 		}
-		std::cout << "Enter player Y : ";
+		std::cout << "Enter player Col : ";
 		std::cin >> yPosPlayer;
 		while (yPosPlayer < 0 || yPosPlayer > 2)
 		{
@@ -146,7 +147,7 @@ void Game::setPlayerMove()
 			std::cin >> yPosPlayer;
 		}
 	}
-	b->gameBoard[xPosPlayer][yPosPlayer] = 'O';
+	b->setPos(xPosPlayer, yPosPlayer, 'O');
 	b->printBoard();
 
 }
@@ -163,11 +164,11 @@ void Game::checkRows()
 
 			for (int c = 0; c < 3; c++)
 			{
-				if (b->gameBoard[r][c] == 'X')
+				if (b->getPos(r, c) == 'X')
 				{
 					counterX++;
 				}
-				if (b->gameBoard[r][c] == 'O')
+				if (b->getPos(r, c) == 'O')
 				{
 					counterO++;
 				}
@@ -189,11 +190,11 @@ void Game::checkCols()
 			counterO = 0;
 			for (int r = 0; r < 3; r++)
 			{
-				if (b->gameBoard[r][c] == 'X')
+				if (b->getPos(r, c) == 'X')
 				{
 					counterX++;
 				}
-				if (b->gameBoard[r][c] == 'O')
+				if (b->getPos(r, c) == 'O')
 				{
 					counterO++;
 				}
@@ -211,11 +212,11 @@ void Game::checkDiagonalsLeft()
 	counterO = 0;
 	for (int rc = 0; rc < 3; rc++)
 	{
-		if (b->gameBoard[rc][rc] == 'X')
+		if (b->getPos(rc, rc) == 'X')
 		{
 			counterX++;
 		}
-		if (b->gameBoard[rc][rc] == 'O')
+		if (b->getPos(rc, rc) == 'O')
 		{
 			counterO++;
 		}
@@ -231,11 +232,11 @@ void Game::checkDiagonalsRight()
 
 	for (int rc = 2; rc > -1; rc--)
 	{
-		if (b->gameBoard[rc][rc] == 'X')
+		if (b->getPos(rc,rc) == 'X')
 		{
 			counterX++;
 		}
-		if (b->gameBoard[rc][rc] == 'O')
+		if (b->getPos(rc, rc) == 'O')
 		{
 			counterO++;
 		}

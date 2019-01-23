@@ -8,6 +8,8 @@ class Game{
 		Game();
 		void checkCounter();
 		bool gameOver = false;
+		void startGame();
+		void playGame();
 		
 
 	private:
@@ -22,8 +24,6 @@ class Game{
 		bool tieGame = false;
 		bool playerWins = false;
 		bool AIWins = false;
-		void startGame();
-		void playGame();
 		void endGame();
 		void checkGameOver();
 		void AIMove();

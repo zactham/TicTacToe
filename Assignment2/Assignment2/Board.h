@@ -5,13 +5,18 @@
 class Board
 {
 public:
+	
 	Board();
-	char gameBoard[3][3] = {};
+	char getPos(int r, int c);
+	void setPos(int r, int c, char symbol);
 	void printBoard();
 	
 
 private:
 	void initBoard();
+	char gameBoard[3][3] = {};
+	
+	
 	
 	
 	

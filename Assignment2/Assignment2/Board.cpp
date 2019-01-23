@@ -16,7 +16,7 @@ void Board::initBoard()
 	{
 		for (int c = 0; c < 3; c++)
 		{
-			gameBoard[r][c] = '!';
+			setPos(r, c, '!');
 		}
 	}
 }
@@ -32,5 +32,15 @@ void Board::printBoard()
 		}
 		std::cout << "" << std::endl;
 	}
+}
+
+char Board::getPos(int r, int c)
+{
+	return gameBoard[r][c];
+}
+
+void Board::setPos(int r, int c, char symbol)
+{
+	gameBoard[r][c] = symbol;
 }
 
