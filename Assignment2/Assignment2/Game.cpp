@@ -4,7 +4,9 @@
 
 Game::Game() 
 {
+	//Intro 
 	startGame();
+	//Game mechanics begin
 	playGame();
 	
 }
@@ -16,23 +18,23 @@ void Game:: startGame()
 
 void Game::playGame()
 {
-	b = new Board();
+	b = new Board();//makes a board obj
 	turnCounter = 0;
 	while (!gameOver)
 	{
-		AIMove();
+		AIMove(); //ai picks a spot
 		
 
-		turnCounter++;
+		turnCounter++; //counts each time an ai makes a spot
 		if (turnCounter > 1)
 		{
-			checkGameOver();
+			checkGameOver();//after 3 turns checks if someone won
 			std::cout << "After AI" << std::endl;
 		}
 
 		if (!gameOver)
 		{
-			setPlayerMove();
+			setPlayerMove(); //player move
 
 
 			if (turnCounter > 1)
@@ -51,13 +53,14 @@ void Game::playGame()
 	}
 	if (!tieGame)
 	{
-		endGame();
+		endGame();//prints final message
 	}
 	int temp;
 	std::cin >> temp;
 	delete b;
 }
 
+//Prints the final message based on who won
 void Game::endGame()
 {
 	if (playerWins)
@@ -70,6 +73,7 @@ void Game::endGame()
 	}
 }
 
+//Uses the counter to determine winner
 void Game::checkCounter()
 {
 	if (counterX == 3)
@@ -88,7 +92,7 @@ void Game::checkCounter()
 
 void Game::checkGameOver()
 {
-	//RUNS THROUGH GRID CHECKING IF THERE ARE 3 XS OR 3 Os
+	//RUNS THROUGH GRID CHECKING IF THERE ARE 3 XS OR 3 Os in each direction
 	checkRows();
 	if (!gameOver)
 	{
@@ -104,6 +108,7 @@ void Game::checkGameOver()
 	}
 }
 
+//Random X is placed on the board in a spot where nothing else is placed
 void Game::AIMove()
 {
 	do
@@ -119,6 +124,7 @@ void Game::AIMove()
 	b->printBoard();
 }
 
+//Asks the player for specific spot if that spot is invalid it prompts for input again
 void Game::setPlayerMove()
 {
 	xPosPlayer = xPosAI;
@@ -145,9 +151,9 @@ void Game::setPlayerMove()
 
 }
 
+//Checks each row for 3 Xs or Os
 void Game::checkRows()
 {
-	
 	for (int r = 0; r < 3; r++)
 	{
 		if (!gameOver)
@@ -172,6 +178,7 @@ void Game::checkRows()
 	}
 }
 
+//Checks each col for 3 Xs or Os
 void Game::checkCols()
 {
 	for (int c = 0; c < 3; c++)
@@ -197,7 +204,7 @@ void Game::checkCols()
 }
 
 
-
+//Checks diagonal from the left for 3 Xs or Os
 void Game::checkDiagonalsLeft()
 {
 	counterX = 0;
@@ -216,6 +223,7 @@ void Game::checkDiagonalsLeft()
 	checkCounter();
 }
 
+//Checks diagonal from the right for 3 Xs or Os
 void Game::checkDiagonalsRight()
 {
 	counterX = 0;

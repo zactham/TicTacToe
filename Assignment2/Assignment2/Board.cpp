@@ -8,6 +8,7 @@ Board::Board()
 	initBoard();
 }
 
+//Creates a board w ! symbolizing blank spots
 void Board::initBoard()
 {
 	//SETS UP GAME BOARD
@@ -20,6 +21,7 @@ void Board::initBoard()
 	}
 }
 
+//Prints the board in a grid
 void Board::printBoard()
 {
 	for (int r = 0; r < 3; r++)
